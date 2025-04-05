@@ -1,0 +1,45 @@
+[
+    {
+        "id": 1,
+        "name":"polo t-shirt",
+        "price": 600,
+        "image": "./assets/images/ac-1.jpg"
+    },
+    {
+        "id": 2,
+        "name":"WHITE BLAZER",
+        "price": 950,
+        "image": "./assets/images/ac-2.jpg"
+    },
+    {
+        "id": 3,
+        "name":"T-SHIRT",
+        "price": 590,
+        "image": "./assets/images/ac-3.jpg"
+    },
+    {
+        "id": 4,
+        "name":"CUTE DRESS",
+        "price": 1000,
+        "image": "./assets/images/ac-4.jpg"
+    },
+    {
+        "id": 5,
+        "name":"TRACK SUIT",
+        "price": 700,
+        "image": "./assets/images/ac-5.jpg"
+    },
+    {
+        "id": 6,
+        "name":"WHITE DRESS",
+        "price": 1300,
+        "image": "./assets/images/ac-8.jpg"
+    },
+    {
+        "id": 7,
+        "name":"BROWN CARGO",
+        "price": 400,
+        "image": "./assets/images/ac-6.jpg"
+    }
+
+]

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shop</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body class="body-search">
+    <div class="container-search">
+        <form class="filter">
+            <div class="item-sr">
+                <label for="">Category</label>
+                <select name="category">
+                    <option value="">---</option>
+                    <option value="T-shirt">T-shirt</option>
+                    <option value="Shirt">Shirt</option>
+                    <option value="Polo">Polo</option>
+                </select>
+            </div>
+            <div class="item-sr">
+                <label for="">Color</label>
+                <select name="color">
+                    <option value="">---</option>
+                    <option value="white">white</option>
+                    <option value="black">black</option>
+                    <option value="grey">grey</option>
+                    <option value="blue">blue</option>
+                    <option value="brown">brown</option>
+                </select>
+            </div>
+            <div class="item-sr">
+                <label for="">Name</label>
+                <input type="text" name="name">
+            </div>
+            <div class="item-sr">
+                <label for="">Min Price</label>
+                <input type="number" name="minPrice">
+            </div>
+            <div class="item-sr">
+                <label for="">Max Price</label>
+                <input type="number" name="maxPrice">
+            </div>
+            <div class="item-sr submit">
+                <button>Search</button>
+            </div>
+        </form>
+        <div class="countResults">
+            Found <b id="count">5</b> results
+        </div>
+        <div id="list">
+
+        </div>
+    </div>
+
+
+    <script>
+
+
+        let list = document.getElementById('list');
+        let filter = document.querySelector('.filter');
+        let count = document.getElementById('count');
+        let listProducts = [
+            {
+                id: 1,
+                name: 'oversized t-shirt',
+                price: 600,
+                quantity: 0,
+                image: "./assets/images/sf-4.jpg",
+                nature: {
+                    color: ['white', 'grey'],
+                    size: ['S', 'M', 'L'],
+                    type: 'T-shirt'
+                }
+            },
+            {
+                id: 2,
+                name: 'polo suit',
+                price: 3000,
+                quantity: 30,
+                image: './assets/images/sf-6.jpg',
+                nature: {
+                    color: ['white', 'blue'],
+                    size: ['S', 'M', 'L'],
+                    type: 'Polo'
+                }
+            },
+            {
+                id: 3,
+                name: 'pink t-shirt',
+                price: 670,
+                quantity: 30,
+                image: './assets/images/sf-8.jpg',
+                nature: {
+                    color: ['white'],
+                    size: ['S', 'M', 'L'],
+                    type: 'T-shirt'
+                }
+            },
+            {
+                id: 4,
+                name: 'navy-blue t-shirt',
+                price: 400,
+                quantity: 30,
+                image: './assets/images/sf-5.jpg',
+                nature: {
+                    color: ['blue', 'blue'],
+                    size: ['S', 'M', 'L'],
+                    type: 'T-shirt'
+                }
+            },
+            {
+                id: 5,
+                name: 'polo t-shirt',
+                price: 3200,
+                quantity: 30,
+                image: './assets/images/sf-2.jpg',
+                nature: {
+                    color: ['blue'],
+                    size: ['S', 'M', 'L'],
+                    type: 'Polo'
+                }
+            },
+            {
+                id: 6,
+                name: 'brown t-shirt',
+                price: 1000,
+                quantity: 30,
+                image: './assets/images/sf-7.jpg',
+                nature: {
+                    color: ['white', 'brown'],
+                    size: ['S', 'M', 'L'],
+                    type: 'Shirt'
+                }
+            },
+
+        ];
+        console.log(listProducts)
+        let productFilter = listProducts;
+        showProduct(productFilter);
+        function showProduct(productFilter) {
+            count.innerText = productFilter.length;
+            list.innerHTML = '';
+            productFilter.forEach(item => {
+                let newItem = document.createElement('div');
+                newItem.classList.add('item-sr');
+
+                
+                let newImage = new Image();
+                newImage.src = item.image;
+                newItem.appendChild(newImage);
+                
+                let newTitle = document.createElement('div');
+                newTitle.classList.add('title');
+                newTitle.innerText = item.name;
+                newItem.appendChild(newTitle);
+                
+                let newPrice = document.createElement('div');
+                newPrice.classList.add('price');
+                newPrice.innerText = item.price.toLocaleString();
+                newItem.appendChild(newPrice);
+
+                list.appendChild(newItem);
+            });
+        }
+        filter.addEventListener('submit', function (event) {
+            event.preventDefault();
+            let valueFilter = event.target.elements;
+            productFilter = listProducts.filter(item => {
+                
+                if (valueFilter.category.value != '') {
+                    if (item.nature.type != valueFilter.category.value) {
+                        return false;
+                    }
+                }
+                
+                if (valueFilter.color.value != '') {
+                    if (!item.nature.color.includes(valueFilter.color.value)) {
+                        return false;
+                    }
+                }
+                
+                if (valueFilter.name.value != '') {
+                    if (!item.name.includes(valueFilter.name.value)) {
+                        return false;
+                    }
+                }
+                
+                if (valueFilter.minPrice.value != '') {
+                    if (item.price < valueFilter.minPrice.value) {
+                        return false;
+                    }
+                }
+                
+                if (valueFilter.maxPrice.value != '') {
+                    if (item.price > valueFilter.maxPrice.value) {
+                        return false;
+                    }
+                }
+
+
+                return true;
+            })
+            showProduct(productFilter);
+        })
+    </script>
+</body>
+
+</html>
